@@ -1,9 +1,12 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
+import { atom, useAtom } from 'jotai';
 import initGame from './game/initGame';
 import './App.css';
 
+const counter = atom(0);
+
 export function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCounter] = useAtom(counter);
   const game = useRef(null);
 
   useEffect(() => {
@@ -13,7 +16,7 @@ export function App() {
   }, []);
 
   const onClick = () => {
-    setCount(count + 1);
+    setCounter(count + 1);
   };
 
   return (
