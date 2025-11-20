@@ -1,24 +1,25 @@
 import initKaplay from './kaplayCtx';
 
-export default function initGame(elementRef) {
+export default function initGame(elementRef, setCounter) {
   const k = initKaplay(elementRef);
+
+  k.camPos();
+  k.loadSprite('background', './background.jpg'); //vite knows that bakground is in public
+  k.loadSprite('frog', './Run.png', {
+    sliceX: 12,
+    sliceY: 1,
+    anims: {
+      run: {
+        from: 0,
+        to: 11,
+        loop: true
+      }
+    }
+  });
 
   k.scene('game', () => {
     const FLOOR_HEIGHT = 600;
 
-    k.camPos();
-    k.loadSprite('background', './background.jpg'); //vite knows that bakground is in public
-    k.loadSprite('frog', './Run.png', {
-      sliceX: 12,
-      sliceY: 1,
-      anims: {
-        run: {
-          from: 0,
-          to: 11,
-          loop: true
-        }
-      }
-    });
     k.loadSprite('mushroom', './Mushroom-Run.png', {
       sliceX: 8,
       sliceY: 1,
@@ -91,7 +92,12 @@ export default function initGame(elementRef) {
     });
   });
 
-  k.scene('gameover', () => {});
+  k.scene('gameover', () => {
+    k.add([k.sprite('background'), k.pos(0), k.scale(2)]);
+
+    const score = 67823678923478;
+    setCounter(score);
+  });
 
   k.go('game');
 }

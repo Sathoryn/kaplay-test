@@ -11,9 +11,9 @@ export function App() {
 
   useEffect(() => {
     if (game) {
-      initGame(game);
+      initGame(game, setCounter);
     }
-  }, []);
+  }, [setCounter]);
 
   const onClick = () => {
     setCounter(count + 1);
