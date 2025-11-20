@@ -77,6 +77,8 @@ export default function initGame(elementRef, setCounter) {
     });
 
     player.onUpdate(() => {
+      setCounter(score => score + 1);
+
       player.direction.x = 0;
       player.direction.y = 0;
       if (k.isKeyDown('d')) player.direction.x += 1;
@@ -94,9 +96,6 @@ export default function initGame(elementRef, setCounter) {
 
   k.scene('gameover', () => {
     k.add([k.sprite('background'), k.pos(0), k.scale(2)]);
-
-    const score = 67823678923478;
-    setCounter(score);
   });
 
   k.go('game');
