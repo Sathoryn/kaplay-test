@@ -1,7 +1,8 @@
 import initKaplay from './kaplayCtx';
 
-export default function initGame() {
-  const k = initKaplay();
+export default function initGame(elementRef) {
+  console.log(elementRef);
+  const k = initKaplay(elementRef);
 
   const FLOOR_HEIGHT = 600;
 
@@ -16,9 +17,9 @@ export default function initGame() {
       run: {
         from: 0,
         to: 11,
-        loop: true,
-      },
-    },
+        loop: true
+      }
+    }
   });
   k.loadSprite('mushroom', './Mushroom-Run.png', {
     sliceX: 8,
@@ -27,9 +28,9 @@ export default function initGame() {
       run: {
         from: 0,
         to: 7,
-        loop: true,
-      },
-    },
+        loop: true
+      }
+    }
   });
 
   k.add([k.sprite('background'), k.pos(0), k.scale(2)]);
@@ -39,14 +40,14 @@ export default function initGame() {
   const player = k.add([
     k.sprite('frog', { anim: 'run' }),
     k.area({
-      shape: new k.Rect(k.vec2(0, 0), 20, 25),
+      shape: new k.Rect(k.vec2(0, 0), 20, 25)
     }),
     k.body(),
     k.pos(100, FLOOR_HEIGHT),
     k.anchor('bot'),
     k.scale(3),
     'player',
-    { speed: 500, direction: k.vec2(0, 0) },
+    { speed: 500, direction: k.vec2(0, 0) }
   ]);
 
   function spawnShroom() {
@@ -57,12 +58,12 @@ export default function initGame() {
       k.pos(1300, FLOOR_HEIGHT),
       k.anchor('bot'),
       k.area({
-        shape: new k.Rect(k.vec2(0, 0), 20, 25),
+        shape: new k.Rect(k.vec2(0, 0), 20, 25)
       }),
       k.scale(3),
       'mushroom',
       k.move(player.pos.angle(1000, FLOOR_HEIGHT), 400),
-      k.offscreen({ destroy: true }),
+      k.offscreen({ destroy: true })
     ]);
     k.wait(k.rand(0.7, 3), spawnShroom);
   }
